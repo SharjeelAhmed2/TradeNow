@@ -22,7 +22,7 @@ Widget customTitle = Text('Trade Now');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
        actions: [
@@ -43,14 +43,79 @@ Widget customTitle = Text('Trade Now');
        Container(child: 
       Column(children: [
         Container(
+           width: double.infinity,
+           height: 60,
+           decoration: BoxDecoration(
+             color: Colors.white,
+             boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+           ),
+          child:
+          Padding
+          (padding: EdgeInsets.all(20),
+            child:  
+          Text('Displaying the current Ads', 
+          style: 
+          TextStyle( color: Colors.black, fontSize: 17, fontFamily: 'Secular', fontWeight: FontWeight.w500),
+          )
+          ),
+          ),
+        
+////////The work of posting ads //////////
+     
+           Container
+          (
+            child: Stack(children: [
+              Positioned
+              (child: 
+              Row
+              (children: [
+                Column
+                (children: [
+                  Container(
+                    child:
+            
+            Padding
+            (padding: EdgeInsets.only(top: 50),
+              child: Image.asset('assets/re2.jpg',
+              width: 180,
+            height: 220,),
+            ),
+                  ),
+                ],),
+                Column
+                (children: [
+                  Container(
+                    child:
+            
+            Padding
+            (padding: EdgeInsets.only(top: 50),
+              child: Image.asset('assets/boyzz.jpg',
+              width: 180,
+            height: 220,),
+            ),
+                  ),
+                ],)
+              ],),)
+            ],),
+          ),
+
+        ///The Work for the end part
+        Container(
           child: Padding(
-            padding: EdgeInsets.only(top: 662),
+            padding: EdgeInsets.only(top: 575),
             child:  Container(
               height: 90,
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(0.0),
-                color: Colors.grey[300],
+                color: Colors.grey[400],
                   ),
                  child: Row(
                    mainAxisAlignment: MainAxisAlignment.end,
