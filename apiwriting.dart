@@ -30,4 +30,16 @@ class ApiDatas
      var convertedDatatoJson = jsonDecode(response.body);
      return convertedDatatoJson;
    }
+    Future changePassword(String password) async  
+   {
+     final response = await http.post(api, headers: headers, body: {'password': password});
+     var convertedDatatoJson = jsonDecode(response.body);
+     return convertedDatatoJson;
+   }
+      Future enterEmail(String email) async  
+   {
+     final response = await http.post(api, headers: headers, body: {'email': email});
+     var convertedDatatoJson = jsonDecode(response.body);
+     return convertedDatatoJson;
+   }
 }
