@@ -36,7 +36,81 @@ Widget customTitle = Text('Trade Now');
        ],
        title: Text("Trade Now", style: TextStyle(fontFamily: 'Mera', fontWeight: FontWeight.bold)), 
       ),
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: Container
+        (
+           color: Colors.redAccent,
+          
+       child:  ListView(
+          children: <Widget>[
+             Container(
+              
+              child:  DrawerHeader(
+                child:  CircleAvatar(
+                   child: Image.asset('assets/log.png'),
+                )),
+                ),
+             Container (
+             
+              child:  Column(
+                // children:  List.generate(4, (int index)
+                // {
+                //   return  ListTile(
+                //     leading:  Icon(Icons.info),
+                //   );
+                // }),
+               children: [
+                 Padding( 
+                   padding: EdgeInsets.fromLTRB(0, 30, 130, 0),
+                   child:
+                 FlatButton.icon(
+                   onPressed: (){},
+                   icon: Icon(Icons.person_outline, color: Colors.white,),
+                   label: Text('My Profile', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
+                 )
+                 ),
+                 SizedBox(height: 10),
+                 Padding( 
+                   padding: EdgeInsets.fromLTRB(0, 30, 120, 0),
+                   child: Container
+                   (
+                     width: double.infinity,
+                   child: 
+                 FlatButton.icon(
+                   onPressed: (){},
+                   icon: Icon(Icons.add_shopping_cart, color: Colors.white,),
+                   label: Text('Categories', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
+                 )
+                 ),
+                 ),
+                 SizedBox(height: 10),
+                 Padding( 
+                   padding: EdgeInsets.fromLTRB(0, 30, 160, 0),
+                   child:
+                 FlatButton.icon(
+                   onPressed: (){},
+                   icon: Icon(Icons.account_balance_wallet, color: Colors.white,),
+                   label: Text('My Ads', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
+                 )
+                 ),
+                  SizedBox(height: 10),
+                 Padding( 
+                   padding: EdgeInsets.fromLTRB(0, 30, 200, 0),
+                   child:
+                 FlatButton.icon(
+                   onPressed: (){},
+                   icon: Icon(Icons.create, color: Colors.white,),
+                   label: Text('Sell', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
+                 )
+                 ),
+               ],
+              ),
+            )
+          ],
+        ),
+      ),
+      ),
+     
       body: 
     SingleChildScrollView(
       child: Stack(children: [
@@ -69,6 +143,7 @@ Widget customTitle = Text('Trade Now');
         
 ////////The work of posting ads //////////
      
+  
            Container
           (
             child: Stack(children: [
@@ -105,85 +180,8 @@ Widget customTitle = Text('Trade Now');
               ],),)
             ],),
           ),
-
         ///The Work for the end part
-        Container(
-          child: Padding(
-            padding: EdgeInsets.only(top: 575),
-            child:  Container(
-              height: 90,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(0.0),
-                color: Colors.grey[400],
-                  ),
-                 child: Row(
-                   mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                       Padding(
-                        padding: EdgeInsets.fromLTRB(2, 10, 0,0),
-                        child:
-                      Column(children: [
-                      Icon(Icons.phone,
-                      size: 30,
-                      color: Colors.redAccent,),
-                      SizedBox(height: 0),
-                      FlatButton(
-                        child:
-                      Text('Contact'),
-                      onPressed: (){},
-                      ),
-                      ],),
-                      ),
-                     Padding(
-                        padding: EdgeInsets.fromLTRB(2, 10, 0,0),
-                        child:
-                      Column(children: [
-                      Icon(Icons.home,
-                      size: 30,
-                      color: Colors.redAccent,),
-                      SizedBox(height: 0),
-                      FlatButton(
-                        child:
-                      Text('Discover'),
-                      onPressed: (){},
-                      ),
-                      ],),
-                      ),
-                     Padding(
-                        padding: EdgeInsets.fromLTRB(2, 10, 0,0),
-                        child:
-                      Column(children: [
-                      Icon(Icons.play_circle_filled,
-                      size: 30,
-                      color: Colors.redAccent,),
-                      SizedBox(height: 0),
-                      FlatButton(
-                        child:
-                      Text('My ads'),
-                      onPressed: (){},
-                      ),
-                      ],),
-                      ),
-                     Padding(
-                        padding: EdgeInsets.fromLTRB(2, 10, 0,0),
-                        child:
-                      Column(children: [
-                      Icon(Icons.person_outline,
-                      size: 30,
-                      color: Colors.redAccent,),
-                      SizedBox(height: 0),
-                      FlatButton(
-                        child:
-                      Text('Profile'),
-                      onPressed: (){},
-                      ),
-                      ],),
-                      ),
-                  ],)
-            ),
-            ),
-        )
+        
       ],),),
       ],)
     )
