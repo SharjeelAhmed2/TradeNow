@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding
               (
 
-                padding: EdgeInsets.fromLTRB(20,30, 0, 0),
+                padding: EdgeInsets.fromLTRB(20,7, 0, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -45,7 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    child: TextFormField(
+                    child:
+                    FlatButton(
+                     
+                      child: TextFormField(
                     decoration: InputDecoration
                     (
                      enabledBorder: InputBorder.none,
@@ -54,6 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
                      prefixIcon: Icon(Icons.search, color: Colors.black,),
                     ),
                     ),
+                     onPressed: (){
+                         showSearch(context: context, delegate: DataSearch());            //  setState((){
+                      },
+                  ),
                   ),
                   InkWell(
                     onTap: (){
@@ -98,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],)
               ),
               Container(
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.all(10),
                 width: double.infinity,
                 height: 90,
                   decoration: BoxDecoration(
@@ -124,16 +131,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Categories(),
-              SizedBox(height: 30,),
+              SizedBox(height: 7,),
              Row(
               
                children: [
+                 Container(
+                   padding: EdgeInsets.only(left: 20),
+                   child:
                  Text('Gaming Collection', style: TextStyle(
                    color: Colors.black, fontFamily: 'Mera', fontSize: 20, fontWeight: FontWeight.bold)
                  ),
+                 ),
                  
                  Container(
-                   padding: EdgeInsets.only(left: 90),
+                   padding: EdgeInsets.only(left: 70),
                    child: FlatButton
                    (
                      onPressed: (){},
@@ -150,8 +161,42 @@ class _HomeScreenState extends State<HomeScreen> {
                (
                  scrollDirection: Axis.horizontal,
                  child:
-            GamingCollection(),
+            GamingCollection(),   
           ),
+             SizedBox(height: 7,),
+             Row(
+              
+               children: [
+                 
+                 Container(
+                   padding: EdgeInsets.only(left: 20),
+                   child:
+                 Text('Book Collection', style: TextStyle(
+                   color: Colors.black, fontFamily: 'Mera', fontSize: 20, fontWeight: FontWeight.bold)
+                 ),
+                 ),
+                 
+                 Container(
+                   padding: EdgeInsets.only(left: 90),
+                   child: FlatButton
+                   (
+                     onPressed: (){},
+                     child:
+                 Text('View more', style: TextStyle(
+                   color: Colors.grey[600], fontFamily: 'Railway', fontSize: 15, fontWeight: FontWeight.bold),
+                 ),
+                 ),
+                 ),
+               ],
+             ),
+             SizedBox(height: 7),
+               SingleChildScrollView
+               (
+                 scrollDirection: Axis.horizontal,
+                 child: BookCollection(),
+               ),
+               SizedBox(height: 4,),
+             Bottom(),
             ],), 
           ),
         ),
@@ -202,7 +247,7 @@ class CategoryCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration
-      (color: Colors.teal,
+      (color: Colors.grey[300],
       borderRadius: BorderRadius.circular(20),
       ),
       child: Image.asset(icon),
@@ -229,6 +274,7 @@ Color withOpacity(double opacity) {
 }
 
 class GamingCollection extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return  Row(children: [
@@ -249,7 +295,7 @@ class GamingCollection extends StatelessWidget {
                    fit: BoxFit.cover,
                    color: Color.fromRGBO(255, 255, 255, 0.6),
                    colorBlendMode: BlendMode.modulate,
-                   height: 150,
+                   height: 130,
                    width: 220,
                  ),
                  FlatButton
@@ -297,7 +343,7 @@ class GamingCollection extends StatelessWidget {
                    fit: BoxFit.cover,
                    color: Color.fromRGBO(255, 255, 255, 0.6),
                    colorBlendMode: BlendMode.modulate,
-                   height: 150,
+                   height: 130,
                    width: 220,
                  ),
                  FlatButton
@@ -345,7 +391,7 @@ class GamingCollection extends StatelessWidget {
                    fit: BoxFit.cover,
                    color: Color.fromRGBO(255, 255, 255, 0.6),
                    colorBlendMode: BlendMode.modulate,
-                   height: 150,
+                   height: 130,
                    width: 220,
                  ),
                  FlatButton
@@ -380,3 +426,288 @@ class GamingCollection extends StatelessWidget {
              ],);
   }
 }
+
+class BookCollection extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return  Container
+              (
+                padding: EdgeInsets.only(left: 10),
+                child:
+                Row(children: [
+                   Container
+                  (
+                    width: 100,
+                    height: 130,
+                    decoration: BoxDecoration
+                    (
+                     color: Colors.grey[200],
+                     shape: BoxShape.rectangle,
+                     borderRadius: BorderRadius.circular(10)
+                    ),
+                     child:
+                    (
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                     child: Image.asset("assets/boyzz.jpg"),
+                  )
+                  ),
+                  ),
+                 
+                  SizedBox(width: 10),
+                   Container
+                  (
+                   width: 100,
+                    height: 130,
+                    decoration: BoxDecoration
+                    (
+                     color: Colors.grey[200],
+                     shape: BoxShape.rectangle,
+                     borderRadius: BorderRadius.circular(10)
+                    ),
+                    child:
+                    (
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                     child: Image.asset("assets/pswhore.jpg"),
+                  )
+                  ),
+                  ),
+                  SizedBox(width: 10),
+                   Container
+                  (
+                  width: 100,
+                    height: 130,
+                    decoration: BoxDecoration
+                    (
+                   color: Colors.grey[200],
+                     shape: BoxShape.rectangle,
+                     borderRadius: BorderRadius.circular(10)
+                    ),
+                     child:
+                    (
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                     child: Image.asset("assets/boyzz.jpg"),
+                  )
+                  ),
+                  ),
+                  SizedBox(width: 10),
+                   Container
+                  (
+                  width: 100,
+                    height: 130,
+                    decoration: BoxDecoration
+                    (
+                      color: Colors.grey[200],
+                     shape: BoxShape.rectangle,
+                     borderRadius: BorderRadius.circular(10)
+                    ),
+                  child:
+                    (
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                     child: Image.asset("assets/boyzz.jpg"),
+                  )
+                  ),
+                  ),
+                  SizedBox(width: 10),
+                   Container
+                  (
+                   width: 100,
+                    height: 130,
+                    decoration: BoxDecoration
+                    (
+                     color: Colors.grey[200],
+                     shape: BoxShape.rectangle,
+                     borderRadius: BorderRadius.circular(10)
+                    ),
+                     child:
+                    (
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                     child: Image.asset("assets/boyzz.jpg"),
+                  )
+                  ),
+                  ),
+                  
+                ],)
+              );
+  }
+}
+
+class Bottom extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+          
+            child:  Container(
+              height: 78,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(0.0),
+                color: Colors.grey[300],
+                  ),
+                 child: Row(
+                   mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                       Padding(
+                        padding: EdgeInsets.fromLTRB(2, 10, 0,0),
+                        child:
+                      Column(children: [
+                      Icon(Icons.phone,
+                      size: 20,
+                      color: Colors.redAccent,),
+                      SizedBox(height: 0),
+                      FlatButton(
+                        child:
+                      Text('Contact'),
+                      onPressed: (){},
+                      ),
+                      ],),
+                      ),
+                     Padding(
+                        padding: EdgeInsets.fromLTRB(2, 10, 0,0),
+                        child:
+                      Column(children: [
+                      Icon(Icons.home,
+                      size: 20,
+                      color: Colors.redAccent,),
+                      SizedBox(height: 0),
+                      FlatButton(
+                        child:
+                      Text('Discover'),
+                      onPressed: (){},
+                      ),
+                      ],),
+                      ),
+                     Padding(
+                        padding: EdgeInsets.fromLTRB(2, 10, 0,0),
+                        child:
+                      Column(children: [
+                      Icon(Icons.camera_front,
+                     size: 20,
+                      color: Colors.redAccent,),
+                      SizedBox(height: 0),
+                      FlatButton(
+                        child:
+                      Text('Sell'),
+                      onPressed: (){},
+                      ),
+                      ],),
+                      ),
+                     Padding(
+                        padding: EdgeInsets.fromLTRB(2, 10, 0,0),
+                        child:
+                      Column(children: [
+                      Icon(Icons.play_circle_filled,
+                      size: 20,
+                      color: Colors.redAccent,),
+                      SizedBox(height: 0),
+                      FlatButton(
+                        child:
+                      Text('My Ads', style: TextStyle(fontSize: 12)),
+                      onPressed: (){},
+                      ),
+                      ],),
+                      ),
+                  ],)
+            ),
+            );
+  }
+}
+
+class DataSearch extends SearchDelegate<String>
+{
+
+final games = [
+  "Uncharted 4",
+  "PlayStation4 Controller",
+  "The Alchemist",
+  "The Brief History of Time",
+  "Nvidia 1660 6GB",
+  "Mouse",
+  "GTA V",
+  "Game of Thrones",
+  "20th Century Boys",
+];
+
+final recentgames = [
+  "PlayStation4 Controller",
+  "The Alchemist",
+  "The Brief History of Time",
+  "Nvidia 1660 6GB",
+  "Mouse",
+];
+
+
+  
+  @override
+  List<Widget> buildActions(BuildContext context) {
+      return
+      [
+        IconButton(icon: Icon(Icons.clear),onPressed: (){
+          query = "";
+        },)
+      ];
+      throw UnimplementedError();
+    } 
+  
+    @override
+    Widget buildLeading(BuildContext context) {
+      return IconButton(
+        icon: AnimatedIcon(icon: 
+        AnimatedIcons.menu_arrow,
+        progress: transitionAnimation),
+        onPressed: (){
+          close(context, null);
+        },
+      );
+    
+      throw UnimplementedError();
+    }
+  
+    @override
+    Widget buildResults(BuildContext context) {
+      return Center(
+        child: Container(
+        height: 100,
+        width: 100,
+        child: Card(
+          color: Colors.red,
+          child: Center(
+            child: Text(query),
+      )
+        ),
+        ),
+      );
+      throw UnimplementedError();
+    }
+  
+    @override
+    Widget buildSuggestions(BuildContext context) {
+    final suggestionList = query.isEmpty?recentgames:games.where((p) => p.startsWith(query)).toList(); //if search bar is empty then just show recent ones else show all
+    return ListView.builder(itemBuilder: 
+    (context, index) => ListTile(
+      onTap: (){
+        showResults(context);
+      },
+      leading: Icon(Icons.book, color: Colors.redAccent,),
+    title: RichText(
+      text: TextSpan(
+        text: suggestionList[index].substring(0, query.length),
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        children: [
+          TextSpan(
+            text: suggestionList[index].substring(query.length),
+            style: TextStyle(color: Colors.grey[500]), 
+          )
+        ]
+      )
+    )),
+    itemCount: suggestionList.length,
+    );
+    throw UnimplementedError();
+  }
+} 
