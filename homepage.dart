@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-   title: 'Navigation Basics',
-   debugShowCheckedModeBanner: false,
-   home: HomePage()
-  ));
-}
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -39,8 +32,7 @@ Widget customTitle = Text('Trade Now');
       drawer: Drawer(
         child: Container
         (
-           color: Colors.redAccent,
-          
+           color: Colors.redAccent, 
        child:  ListView(
           children: <Widget>[
              Container(
@@ -103,6 +95,16 @@ Widget customTitle = Text('Trade Now');
                    label: Text('Sell', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
                  )
                  ),
+                    SizedBox(height: 10),
+                 Padding( 
+                   padding: EdgeInsets.fromLTRB(0, 30, 160, 0),
+                   child:
+                 FlatButton.icon(
+                   onPressed: (){},
+                   icon: Icon(Icons.person_add, color: Colors.white,),
+                   label: Text('Logout', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
+                 )
+                 ),
                ],
               ),
             )
@@ -110,13 +112,59 @@ Widget customTitle = Text('Trade Now');
         ),
       ),
       ),
-     
+     //End of the Drawer work here
+
+
       body: 
     SingleChildScrollView(
       child: Stack(children: [
        Container(child: 
       Column(children: [
+    
+        
+////////The work of posting ads //////////
+     SizedBox(height: 10),
+     
         Container(
+           width: double.infinity,
+           height: 70,
+           decoration: BoxDecoration(
+             color: Colors.transparent,
+             boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+           ),
+          child:
+          Padding
+          (padding: EdgeInsets.fromLTRB(60, 20, 0, 0),
+            child:  
+            Row
+          (children: [
+            FlatButton(
+              onPressed:(){},
+              child:
+            Container(child:CircleAvatar(
+            radius: 30,
+            backgroundImage: 
+            AssetImage("assets/download.png"),
+            )
+            ),
+            ),
+            SizedBox(width: 40),
+           FlatButton.icon(onPressed: (){},
+            icon: 
+            Icon(Icons.book, size: 50,color: Colors.yellowAccent,), label: Text(''))
+          ]
+          ),
+          ),
+          ),
+          SizedBox(height: 15),
+              Container(
            width: double.infinity,
            height: 60,
            decoration: BoxDecoration(
@@ -140,45 +188,101 @@ Widget customTitle = Text('Trade Now');
           )
           ),
           ),
-        
-////////The work of posting ads //////////
-     
-  
+          SizedBox(height: 15),
            Container
           (
-            child: Stack(children: [
-              Positioned
-              (child: 
-              Row
+              
+           width: double.infinity,
+           height: 290,
+           decoration: BoxDecoration(
+             color: Colors.white,
+             boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+           ), 
+           child: Column
+           (children: [
+              Row(children: [
+              Column
               (children: [
-                Column
-                (children: [
-                  Container(
-                    child:
-            
-            Padding
-            (padding: EdgeInsets.only(top: 50),
+                 Container
+              (
+            padding: EdgeInsets.only(bottom: 0),
               child: Image.asset('assets/re2.jpg',
               width: 180,
-            height: 220,),
+              height: 200,
+           ),
             ),
-                  ),
-                ],),
+            SizedBox(height: 10),
+            Container
+              (
+                padding: EdgeInsets.only(right: 70),
+                child: Text('Rs 3700', 
+                style: TextStyle(fontFamily: 'CourierPrimeItalic', fontWeight: FontWeight.bold, fontSize: 20,)),
+              ),
+              SizedBox(height: 5),
+                Container
+              (
+                padding: EdgeInsets.only(right: 40),
+                child: Text('Resident Evil 2 Disc', 
+                style: TextStyle(fontFamily: 'Mera', fontWeight: FontWeight.bold )),
+              ),
+              SizedBox(height: 5),
+                Container
+              (
+                padding: EdgeInsets.only(right: 40),
+                child: Text('Karachi', 
+                style: TextStyle(fontFamily: 'Mera', fontWeight: FontWeight.bold )),
+              ),
+              ],),
+           
                 Column
-                (children: [
-                  Container(
-                    child:
-            
-            Padding
-            (padding: EdgeInsets.only(top: 50),
-              child: Image.asset('assets/boyzz.jpg',
+              (children: [
+                 Container
+              (
+            padding: EdgeInsets.only(bottom: 0),
+              child: Image.asset('assets/richppor.jpg',
               width: 180,
-            height: 220,),
+              height: 200,
+           ),
             ),
-                  ),
-                ],)
-              ],),)
-            ],),
+            SizedBox(height: 10),
+            Container
+              (
+                padding: EdgeInsets.only(right: 70),
+                child: Text('Rs 1500', 
+                style: TextStyle(fontFamily: 'CourierPrimeItalic', fontWeight: FontWeight.bold, fontSize: 20,)),
+              ),
+              SizedBox(height: 5),
+                Container
+              (
+                padding: EdgeInsets.only(right: 40),
+                child: Text('Rich Dad Poor Dad', 
+                style: TextStyle(fontFamily: 'Mera', fontWeight: FontWeight.bold )),
+              ),
+              SizedBox(height: 5),
+                Container
+              (
+                padding: EdgeInsets.only(right: 40),
+                child: Text('Lahore', 
+                style: TextStyle(fontFamily: 'Mera', fontWeight: FontWeight.bold )),
+              ),
+              ],),
+           
+            ],), 
+           ],)
+          ),
+          SizedBox(
+            height: 10,
+            child: Center
+            (child: Container( 
+            height: 5.0,
+            color: Colors.red),)
           ),
         ///The Work for the end part
         
