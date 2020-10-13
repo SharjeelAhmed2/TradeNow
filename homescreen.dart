@@ -45,23 +45,32 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    child:
-                    FlatButton(
-                     
-                      child: TextFormField(
+                    child: Stack(children: [
+                       TextFormField(
                     decoration: InputDecoration
                     (
                      enabledBorder: InputBorder.none,
                      focusedBorder: InputBorder.none,
-                     hintText: 'Search Product', 
-                     prefixIcon: Icon(Icons.search, color: Colors.black,),
+                     hintText: ' Search Product', 
+                    // prefixIcon: Icon(Icons.search, color: Colors.black,),
                     ),
                     ),
-                     onPressed: (){
-                         showSearch(context: context, delegate: DataSearch());            //  setState((){
+                    Padding
+                    (
+                      padding: EdgeInsets.only(left: 200),
+                      child: 
+                    IconButton
+                    (
+                    
+                      onPressed: (){
+                         showSearch(context: context, delegate: DataSearch()); 
                       },
-                  ),
-                  ),
+                      icon: Icon(Icons.search, color: Colors.grey[600]),
+                    )
+                    ),
+                    ]),   
+                ),
+                
                   InkWell(
                     onTap: (){
                            Navigator.push(
