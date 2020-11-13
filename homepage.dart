@@ -1,62 +1,113 @@
+import 'dart:io';
+
+import 'package:Project/Ad/PostAd.dart';
+import 'package:Project/user/user.dart';
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 
+class Homepage extends StatefulWidget {
 
+   final String email; 
+   final String username;
+   final String contact;
+   final String city;
+  final File imageFile;
+  final File adImage;
 
-class HomePage extends StatefulWidget {
+  const Homepage({Key key, this.imageFile, this.email, this.username, this.contact, this.city, this.adImage}) : super(key: key);
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomepageState createState() => _HomepageState();
 }
 
-class _HomePageState extends State<HomePage> {
-
-Icon customIcon = Icon(Icons.search);
-Widget customTitle = Text('Trade Now');
+class _HomepageState extends State<Homepage> {
+  
+  
+     Future<void> _showChoiceDialog(BuildContext context)
+  {
+    return showDialog(context: context, builder: (BuildContext context)
+    {
+      return AlertDialog(
+        title: Text('View Ads of'),
+        content: SingleChildScrollView(
+          child: ListBody(children: [
+             GestureDetector(
+                    child: Text('Game'),
+                    onTap: (){
+                    FlatButton(onPressed: (){},
+                    child: Text(''));
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  GestureDetector(
+                    child: Text('Book'),
+                    onTap: (){
+                    FlatButton(onPressed: (){},
+                    child: Text(''));
+                    },
+                  ),
+          ],)
+        )
+      );
+    }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      appBar: AppBar(
-        backgroundColor: Colors.redAccent,
-       actions: [
-         IconButton(
-           icon: customIcon,
-           onPressed: (){
-             showSearch(context: context, delegate: DataSearch());            //  setState((){
-         
-             },
-         )
-       ],
-       title: Text("Trade Now", style: TextStyle(fontFamily: 'Mera', fontWeight: FontWeight.bold)), 
-      ),
-      drawer: Drawer(
+    
+     Widget image_carousel = new Container(
+       height: 200,
+       child: Carousel(
+          boxFit: BoxFit.cover,
+          images: [
+            AssetImage('assets/games.jpg'),
+            AssetImage('assets/gpu.jpg'),
+            AssetImage('assets/mouse.png'),
+            AssetImage('assets/no.png'),
+          ],
+          autoplay: false,
+          animationCurve: Curves.fastLinearToSlowEaseIn,
+          animationDuration: Duration(microseconds: 10000),
+       ),
+     );
+
+     return Scaffold(
+          drawer: Drawer(
         child: Container
         (
-           color: Colors.redAccent, 
+           color: Colors.green, 
        child:  ListView(
           children: <Widget>[
              Container(
-              
+              color: Colors.redAccent,
               child:  DrawerHeader(
-                child:  CircleAvatar(
-                   child: Image.asset('assets/log.png'),
-                )),
+                child: CircleAvatar(
+              backgroundColor: Colors.black,
+              radius: 65.0,
+              child: CircleAvatar(
+                radius: 61.0,
+                child: ClipOval(
+
+                  child: widget.imageFile == null ? Center(
+                child: Image.asset('assets/default.png')) : Image.file(widget.imageFile),
+                ),
+                backgroundColor: Colors.white,
+              ),
+            ),
+            ),
                 ),
              Container (
              
               child:  Column(
-                // children:  List.generate(4, (int index)
-                // {
-                //   return  ListTile(
-                //     leading:  Icon(Icons.info),
-                //   );
-                // }),
                children: [
                  Padding( 
                    padding: EdgeInsets.fromLTRB(0, 30, 130, 0),
                    child:
                  FlatButton.icon(
-                   onPressed: (){},
+                   onPressed: (){
+                      var route = MaterialPageRoute(builder: (BuildContext context) => UserProfilePage1(username: widget.username, email: widget.email, contact: widget.contact, city: widget.contact));
+                  Navigator.of(context).push(route);
+                   },
                    icon: Icon(Icons.person_outline, color: Colors.white,),
                    label: Text('My Profile', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
                  )
@@ -69,7 +120,9 @@ Widget customTitle = Text('Trade Now');
                      width: double.infinity,
                    child: 
                  FlatButton.icon(
-                   onPressed: (){},
+                   onPressed: (){
+                 _showChoiceDialog(context);
+                   },
                    icon: Icon(Icons.add_shopping_cart, color: Colors.white,),
                    label: Text('Categories', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
                  )
@@ -80,9 +133,11 @@ Widget customTitle = Text('Trade Now');
                    padding: EdgeInsets.fromLTRB(0, 30, 160, 0),
                    child:
                  FlatButton.icon(
-                   onPressed: (){},
+                   onPressed: (){
+                     Navigator.pushNamed(context, '/list');
+                   },
                    icon: Icon(Icons.account_balance_wallet, color: Colors.white,),
-                   label: Text('My Ads', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
+                   label: Text('Ads      ', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
                  )
                  ),
                   SizedBox(height: 10),
@@ -90,7 +145,9 @@ Widget customTitle = Text('Trade Now');
                    padding: EdgeInsets.fromLTRB(0, 30, 200, 0),
                    child:
                  FlatButton.icon(
-                   onPressed: (){},
+                   onPressed: (){
+                     Navigator.pushNamed(context, '/sell');
+                   },
                    icon: Icon(Icons.create, color: Colors.white,),
                    label: Text('Sell', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
                  )
@@ -100,7 +157,9 @@ Widget customTitle = Text('Trade Now');
                    padding: EdgeInsets.fromLTRB(0, 30, 160, 0),
                    child:
                  FlatButton.icon(
-                   onPressed: (){},
+                   onPressed: (){
+                     Navigator.pushNamed(context, '/');
+                   },
                    icon: Icon(Icons.person_add, color: Colors.white,),
                    label: Text('Logout', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
                  )
@@ -112,277 +171,88 @@ Widget customTitle = Text('Trade Now');
         ),
       ),
       ),
-     //End of the Drawer work here
-
-
-      body: 
-    SingleChildScrollView(
-      child: Stack(children: [
-       Container(child: 
-      Column(children: [
-    
-        
-////////The work of posting ads //////////
-     SizedBox(height: 10),
-     
-        Container(
-           width: double.infinity,
-           height: 70,
-           decoration: BoxDecoration(
-             color: Colors.transparent,
-             boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        title: Center(child:Text('Trade-Now', style: TextStyle(color: Colors.black, fontSize: 24))),
+        iconTheme: new IconThemeData(color: Colors.green),
+        actions: [
+          FlatButton.icon(onPressed: (){
+            Navigator.pushNamed(context, '/');
+          }, icon: Icon(Icons.person_add), label: Text(''))
+        ],
+      ),
+      
+   
+      body:    SingleChildScrollView(
+        child: Column(children: [
+        SizedBox(height: 10),
+         Container(
+                width: double.infinity,
+                height: 90,
+                  decoration: BoxDecoration(
+                 color: Color(0xFF4A3298), 
+                 borderRadius: BorderRadius.circular(5),
                 ),
-              ],
-           ),
-          child:
-          Padding
-          (padding: EdgeInsets.fromLTRB(60, 20, 0, 0),
-            child:  
-            Row
-          (children: [
-            FlatButton(
-              onPressed:(){},
-              child:
-            Container(child:CircleAvatar(
-            radius: 30,
-            backgroundImage: 
-            AssetImage("assets/download.png"),
-            )
-            ),
-            ),
-            SizedBox(width: 40),
-           FlatButton.icon(onPressed: (){},
-            icon: 
-            Icon(Icons.book, size: 50,color: Colors.yellowAccent,), label: Text(''))
-          ]
-          ),
-          ),
-          ),
-          SizedBox(height: 15),
-              Container(
-           width: double.infinity,
-           height: 60,
-           decoration: BoxDecoration(
-             color: Colors.white,
-             boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-           ),
-          child:
-          Padding
-          (padding: EdgeInsets.all(20),
-            child:  
-          Text('Displaying the current Ads', 
-          style: 
-          TextStyle( color: Colors.black, fontSize: 17, fontFamily: 'Secular', fontWeight: FontWeight.w500),
-          )
-          ),
-          ),
-          SizedBox(height: 15),
-           Container
-          (
+        child: Center(
+          child:Text('Come and Trade your Books / Games', style: TextStyle(color: Colors.white, fontSize: 20),
+         ),
+         ),
+         ),
+         Container(
+           child: image_carousel,
+         ),
+        Row(
               
-           width: double.infinity,
-           height: 290,
-           decoration: BoxDecoration(
-             color: Colors.white,
-             boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
+               children: [
+                 Container(
+                   padding: EdgeInsets.only(left: 20),
+                   child:
+                 Text('Gaming Collection', style: TextStyle(
+                   color: Colors.black, fontFamily: 'Mera', fontSize: 20, fontWeight: FontWeight.bold)
+                 ),
+                 ),
+                 
+                 Container(
+                   padding: EdgeInsets.only(left: 70),
+                   child: FlatButton
+                   (
+                     onPressed: (){},
+                     child:
+                 Text('View more', style: TextStyle(
+                   color: Colors.grey[600], fontFamily: 'Railway', fontSize: 15, fontWeight: FontWeight.bold),
+                 ),
+                 ),
+                 ),
+               ],
+             ),
+             SizedBox(height: 10,),
+             SingleChildScrollView(
+               scrollDirection: Axis.horizontal,
+               child:
+             Row(children: [
+                    Container(
+          padding: EdgeInsets.all(10),
+              child:   widget.adImage == null ? Center(
+                child: Text('')) : Image.file(widget.adImage),
+              width: 300,
+              height: 300,
            ), 
-           child: Column
-           (children: [
-              Row(children: [
-              Column
-              (children: [
-                 Container
-              (
-            padding: EdgeInsets.only(bottom: 0),
-              child: Image.asset('assets/re2.jpg',
-              width: 180,
-              height: 200,
-           ),
-            ),
-            SizedBox(height: 10),
-            Container
-              (
-                padding: EdgeInsets.only(right: 70),
-                child: Text('Rs 3700', 
-                style: TextStyle(fontFamily: 'CourierPrimeItalic', fontWeight: FontWeight.bold, fontSize: 20,)),
-              ),
-              SizedBox(height: 5),
-                Container
-              (
-                padding: EdgeInsets.only(right: 40),
-                child: Text('Resident Evil 2 Disc', 
-                style: TextStyle(fontFamily: 'Mera', fontWeight: FontWeight.bold )),
-              ),
-              SizedBox(height: 5),
-                Container
-              (
-                padding: EdgeInsets.only(right: 40),
-                child: Text('Karachi', 
-                style: TextStyle(fontFamily: 'Mera', fontWeight: FontWeight.bold )),
-              ),
-              ],),
-           
-                Column
-              (children: [
-                 Container
-              (
-            padding: EdgeInsets.only(bottom: 0),
-              child: Image.asset('assets/richppor.jpg',
-              width: 180,
-              height: 200,
-           ),
-            ),
-            SizedBox(height: 10),
-            Container
-              (
-                padding: EdgeInsets.only(right: 70),
-                child: Text('Rs 1500', 
-                style: TextStyle(fontFamily: 'CourierPrimeItalic', fontWeight: FontWeight.bold, fontSize: 20,)),
-              ),
-              SizedBox(height: 5),
-                Container
-              (
-                padding: EdgeInsets.only(right: 40),
-                child: Text('Rich Dad Poor Dad', 
-                style: TextStyle(fontFamily: 'Mera', fontWeight: FontWeight.bold )),
-              ),
-              SizedBox(height: 5),
-                Container
-              (
-                padding: EdgeInsets.only(right: 40),
-                child: Text('Lahore', 
-                style: TextStyle(fontFamily: 'Mera', fontWeight: FontWeight.bold )),
-              ),
-              ],),
-           
-            ],), 
-           ],)
-          ),
-          SizedBox(
-            height: 10,
-            child: Center
-            (child: Container( 
-            height: 5.0,
-            color: Colors.red),)
-          ),
-        ///The Work for the end part
+             ],)
+             )
+             ],),
         
-      ],),),
-      ],)
-    )
-    );
+      ),
+         floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.redAccent,
+        child: Icon(Icons.photo_camera),
+        onPressed: (){ 
+                 var route = MaterialPageRoute(builder: (BuildContext context) => ThirdScreen(name: widget.username,));
+                 Navigator.of(context).push(route);
+        },
+        
+      ),
+       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+     );
   }
 }
-
-class DataSearch extends SearchDelegate<String>
-{
-
-final games = [
-  "Uncharted 4",
-  "PlayStation4 Controller",
-  "The Alchemist",
-  "The Brief History of Time",
-  "Nvidia 1660 6GB",
-  "Mouse",
-  "GTA V",
-  "Game of Thrones",
-  "20th Century Boys",
-];
-
-final recentgames = [
-  "PlayStation4 Controller",
-  "The Alchemist",
-  "The Brief History of Time",
-  "Nvidia 1660 6GB",
-  "Mouse",
-];
-
-
-  
-  @override
-  List<Widget> buildActions(BuildContext context) {
-      return
-      [
-        IconButton(icon: Icon(Icons.clear),onPressed: (){
-          query = "";
-        },)
-      ];
-      throw UnimplementedError();
-    } 
-  
-    @override
-    Widget buildLeading(BuildContext context) {
-      return IconButton(
-        icon: AnimatedIcon(icon: 
-        AnimatedIcons.menu_arrow,
-        progress: transitionAnimation),
-        onPressed: (){
-          close(context, null);
-        },
-      );
-    
-      throw UnimplementedError();
-    }
-  
-    @override
-    Widget buildResults(BuildContext context) {
-      return Center(
-        child: Container(
-        height: 100,
-        width: 100,
-        child: Card(
-          color: Colors.red,
-          child: Center(
-            child: Text(query),
-      )
-        ),
-        ),
-      );
-      throw UnimplementedError();
-    }
-  
-    @override
-    Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty?recentgames:games.where((p) => p.startsWith(query)).toList(); //if search bar is empty then just show recent ones else show all
-    return ListView.builder(itemBuilder: 
-    (context, index) => ListTile(
-      onTap: (){
-        showResults(context);
-      },
-      leading: Icon(Icons.book, color: Colors.redAccent,),
-    title: RichText(
-      text: TextSpan(
-        text: suggestionList[index].substring(0, query.length),
-        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        children: [
-          TextSpan(
-            text: suggestionList[index].substring(query.length),
-            style: TextStyle(color: Colors.grey[500]), 
-          )
-        ]
-      )
-    )),
-    itemCount: suggestionList.length,
-    );
-    throw UnimplementedError();
-  }
-} 
