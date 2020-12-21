@@ -1,28 +1,24 @@
 import 'dart:io';
-
-import 'package:Project/Ad/PostAd.dart';
-import 'package:Project/user/user.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:lauda/grid/gridview.dart';
+import 'package:lauda/navigation/navbaar.dart';
+import 'package:lauda/user/users.dart';
 
 class Homepage extends StatefulWidget {
+final File imageFile;
+final String name;
+final String contact;
+final String email;
+final String address;
 
-   final String email; 
-   final String username;
-   final String contact;
-   final String city;
-  final File imageFile;
-  final File adImage;
-
-  const Homepage({Key key, this.imageFile, this.email, this.username, this.contact, this.city, this.adImage}) : super(key: key);
+  const Homepage({Key key, this.imageFile, this.name, this.contact, this.email, this.address}) : super(key: key);
   @override
   _HomepageState createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
-  
-  
-     Future<void> _showChoiceDialog(BuildContext context)
+    Future<void> _showChoiceDialog(BuildContext context)
   {
     return showDialog(context: context, builder: (BuildContext context)
     {
@@ -51,11 +47,34 @@ class _HomepageState extends State<Homepage> {
     }
     );
   }
+   List<Product21> productList =[
+    Product21(name: "Xbox360 Games", price: "13,000", image: "assets/games.jpg"),
+    Product21(name: "PlayStation4", price: "33,000", image: "assets/playstation4.jpg"),
+     Product21(name: "Xbox360", price: "21,000", image: "assets/xbox.png"),
+      Product21(name: "Intel HD Graphics Card", price: "25,000", image: "assets/gpu.jpg"),
+  ];
+   Widget showData(data)
+   {
+     return Card(
+       margin: EdgeInsets.all(10),
+       child: Center(
+       child: Column(
+        children:[
+          Image.asset(data.image),
+          SizedBox(height: 4,),
+          Text(data.name),
+          SizedBox(height: 4,),
+          Text(data.price)
+        ]
+       )
+       )
+     );
+   }
 
   @override
   Widget build(BuildContext context) {
     
-     Widget image_carousel = new Container(
+     Widget imageCarousel = new Container(
        height: 200,
        child: Carousel(
           boxFit: BoxFit.cover,
@@ -70,9 +89,8 @@ class _HomepageState extends State<Homepage> {
           animationDuration: Duration(microseconds: 10000),
        ),
      );
-
-     return Scaffold(
-          drawer: Drawer(
+    return Scaffold(
+      drawer: Drawer(
         child: Container
         (
            color: Colors.green, 
@@ -87,7 +105,6 @@ class _HomepageState extends State<Homepage> {
               child: CircleAvatar(
                 radius: 61.0,
                 child: ClipOval(
-
                   child: widget.imageFile == null ? Center(
                 child: Image.asset('assets/default.png')) : Image.file(widget.imageFile),
                 ),
@@ -105,8 +122,8 @@ class _HomepageState extends State<Homepage> {
                    child:
                  FlatButton.icon(
                    onPressed: (){
-                      var route = MaterialPageRoute(builder: (BuildContext context) => UserProfilePage1(username: widget.username, email: widget.email, contact: widget.contact, city: widget.contact));
-                  Navigator.of(context).push(route);
+                          var route = MaterialPageRoute(builder: (BuildContext context) =>  OwnProfile(email: widget.email, contact: widget.contact, username: widget.name));
+                              Navigator.of(context).push(route);
                    },
                    icon: Icon(Icons.person_outline, color: Colors.white,),
                    label: Text('My Profile', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
@@ -134,7 +151,7 @@ class _HomepageState extends State<Homepage> {
                    child:
                  FlatButton.icon(
                    onPressed: (){
-                     Navigator.pushNamed(context, '/list');
+                     Navigator.pushNamed(context, '/post');
                    },
                    icon: Icon(Icons.account_balance_wallet, color: Colors.white,),
                    label: Text('Ads      ', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
@@ -146,7 +163,7 @@ class _HomepageState extends State<Homepage> {
                    child:
                  FlatButton.icon(
                    onPressed: (){
-                     Navigator.pushNamed(context, '/sell');
+                     Navigator.pushNamed(context, '/grid');
                    },
                    icon: Icon(Icons.create, color: Colors.white,),
                    label: Text('Sell', style: TextStyle(color: Colors.white, fontFamily: 'Mera', fontSize: 26, fontWeight: FontWeight.bold)),
@@ -171,7 +188,7 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
       ),
-      appBar: AppBar(
+       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         title: Center(child:Text('Trade-Now', style: TextStyle(color: Colors.black, fontSize: 24))),
@@ -182,9 +199,8 @@ class _HomepageState extends State<Homepage> {
           }, icon: Icon(Icons.person_add), label: Text(''))
         ],
       ),
-      
-   
-      body:    SingleChildScrollView(
+      body: SafeArea(
+        child: SingleChildScrollView(
         child: Column(children: [
         SizedBox(height: 10),
          Container(
@@ -200,7 +216,7 @@ class _HomepageState extends State<Homepage> {
          ),
          ),
          Container(
-           child: image_carousel,
+           child: imageCarousel,
          ),
         Row(
               
@@ -208,7 +224,7 @@ class _HomepageState extends State<Homepage> {
                  Container(
                    padding: EdgeInsets.only(left: 20),
                    child:
-                 Text('Gaming Collection', style: TextStyle(
+                 Text('Newly Posted', style: TextStyle(
                    color: Colors.black, fontFamily: 'Mera', fontSize: 20, fontWeight: FontWeight.bold)
                  ),
                  ),
@@ -217,7 +233,10 @@ class _HomepageState extends State<Homepage> {
                    padding: EdgeInsets.only(left: 70),
                    child: FlatButton
                    (
-                     onPressed: (){},
+                     onPressed: (){
+                       var route = MaterialPageRoute(builder: (BuildContext context) => Grud(email: widget.email, contact: widget.contact, name: widget.name, address: widget.address,));
+                              Navigator.of(context).push(route);
+                     },
                      child:
                  Text('View more', style: TextStyle(
                    color: Colors.grey[600], fontFamily: 'Railway', fontSize: 15, fontWeight: FontWeight.bold),
@@ -226,33 +245,33 @@ class _HomepageState extends State<Homepage> {
                  ),
                ],
              ),
-             SizedBox(height: 10,),
-             SingleChildScrollView(
-               scrollDirection: Axis.horizontal,
-               child:
-             Row(children: [
-                    Container(
-          padding: EdgeInsets.all(10),
-              child:   widget.adImage == null ? Center(
-                child: Text('')) : Image.file(widget.adImage),
-              width: 300,
-              height: 300,
-           ), 
-             ],)
-             )
-             ],),
-        
+             SizedBox(height: 10,), 
+              Container(
+          child: 
+         GridView.count(
+           physics: ScrollPhysics(),
+           shrinkWrap: true,
+          crossAxisCount: 2,
+          // Generate 100 widgets that display their index in the List.
+          children: List.generate(productList.length, (index)
+          {
+            return Center(
+              child: showData(productList[index]),
+            );
+          }),
+        ),
       ),
-         floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.redAccent,
-        child: Icon(Icons.photo_camera),
-        onPressed: (){ 
-                 var route = MaterialPageRoute(builder: (BuildContext context) => ThirdScreen(name: widget.username,));
-                 Navigator.of(context).push(route);
-        },
-        
+             ],),     
       ),
-       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-     );
+      ),
+      bottomNavigationBar: NavigationBar(),
+      //   floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Colors.redAccent,
+      //   child: Icon(Icons.image),
+      //   onPressed: (){    
+      //   },
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }
